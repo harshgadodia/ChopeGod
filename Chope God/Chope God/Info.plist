@@ -23,13 +23,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-<<<<<<< HEAD
 	<string>Need your camera...</string>
-=======
-	<string>This application will use the camera for Augmented Reality.</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This application will use location for Augmented Reality.</string>
->>>>>>> 7c510fa78a4b40dbd8619fc28ff3948a883c5c6d
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
