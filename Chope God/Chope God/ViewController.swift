@@ -12,9 +12,10 @@ import ARKit
 import ARCL
 import CoreLocation
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     
     var sceneLocationView = SceneLocationView()
+    let locationManager = CLLocationManager()
 
     @IBOutlet var sceneView: ARSCNView!
     
@@ -31,10 +32,27 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        //let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
         // Set the scene to the view
-        sceneView.scene = scene
+        //sceneView.scene = scene
+        
+        // Set up location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        // Load chopes
+        //Currently set to Cinammon Dining Hall
+        let pinCoordinate = CLLocationCoordinate2D(latitude: 1.30631563896222, longitude: 103.773329239156)
+        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 23)
+        let pinImage = UIImage(named: "pin")!
+        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
+        pinLocationNode.scaleRelativeToDistance = true
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+        
+        view.addSubview(sceneLocationView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -90,4 +108,15 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
         
     }
+    
+    //MARK: - Location Manager Delegate Methods
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count - 1]
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+        }
+        
+        print("Lat: \(location.coordinate.latitude) || Long: \(location.coordinate.longitude) || Altitude: \(location.altitude)")
+    }
+    
 }
