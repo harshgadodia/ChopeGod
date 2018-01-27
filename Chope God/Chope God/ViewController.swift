@@ -89,11 +89,16 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        //view.bringSubview(toFront: addNewObjectButton)
 
+        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+        button.backgroundColor = .green
+        button.setTitle("Test Button", for: .normal)
+        button.addTarget(self, action: #selector(addNewObjectAction), for: .touchUpInside)
+        
         sceneLocationView.run()
         view.addSubview(sceneLocationView)
+        
+        sceneLocationView.addSubview(button)
         
         // Set the view's delegate
         sceneView.delegate = self
