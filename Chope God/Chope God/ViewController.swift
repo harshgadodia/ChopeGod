@@ -90,7 +90,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //view.bringSubview(toFront: addNewObjectButton)
+        view.bringSubview(toFront: addNewObjectButton)
 
         sceneLocationView.run()
         view.addSubview(sceneLocationView)

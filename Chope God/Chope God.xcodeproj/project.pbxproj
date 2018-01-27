@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A36F0D4201CCC2A00B47F12 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3A36F0D3201CCC2900B47F12 /* GoogleService-Info.plist */; };
 		3A53350B201C3667001A985B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53350A201C3667001A985B /* AppDelegate.swift */; };
 		3A53350D201C3667001A985B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A53350C201C3667001A985B /* art.scnassets */; };
 		3A53350F201C3667001A985B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53350E201C3667001A985B /* ViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3A36F0D3201CCC2900B47F12 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3A533507201C3667001A985B /* Chope God.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chope God.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A53350A201C3667001A985B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A53350C201C3667001A985B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				3A533513201C3667001A985B /* Assets.xcassets */,
 				3A533515201C3667001A985B /* LaunchScreen.storyboard */,
 				3A533518201C3667001A985B /* Info.plist */,
+				3A36F0D3201CCC2900B47F12 /* GoogleService-Info.plist */,
 			);
 			path = "Chope God";
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 			files = (
 				3A53350D201C3667001A985B /* art.scnassets in Resources */,
 				3A533517201C3667001A985B /* LaunchScreen.storyboard in Resources */,
+				3A36F0D4201CCC2A00B47F12 /* GoogleService-Info.plist in Resources */,
 				3A533514201C3667001A985B /* Assets.xcassets in Resources */,
 				3A533512201C3667001A985B /* Main.storyboard in Resources */,
 			);
@@ -172,13 +176,19 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Chope God/Pods-Chope God-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/ARCL/ARCL.framework",
 				"${BUILT_PRODUCTS_DIR}/DynamicBlurView/DynamicBlurView.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ARCL.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DynamicBlurView.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PopupDialog.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -365,11 +375,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HP2VYGYS5H;
+				DEVELOPMENT_TEAM = FH2EF8NL6A;
 				INFOPLIST_FILE = "Chope God/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harsh.Chope-God";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.karrui.Chope-God";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -382,11 +392,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HP2VYGYS5H;
+				DEVELOPMENT_TEAM = FH2EF8NL6A;
 				INFOPLIST_FILE = "Chope God/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harsh.Chope-God";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.karrui.Chope-God";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

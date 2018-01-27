@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BV1-FR-VrT">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,15 +15,14 @@
             <objects>
                 <viewController id="BV1-FR-VrT" customClass="ViewController" customModule="Chope_God" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="s7y-ER-d5Q">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FB1-UR-Hek">
-                                <rect key="frame" x="0.0" y="44" width="375" height="768"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="686"/>
                             </arscnView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ov-Xt-e3w">
-                                <rect key="frame" x="138" y="699" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9ov-Xt-e3w">
+                                <rect key="frame" x="138" y="593" width="97" height="24"/>
                                 <state key="normal" title="+"/>
                                 <connections>
                                     <action selector="addNewObjectAction:" destination="BV1-FR-VrT" eventType="touchUpInside" id="P5D-yC-J8N"/>
@@ -33,7 +32,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="wAz-10-WZ8" firstAttribute="bottom" secondItem="FB1-UR-Hek" secondAttribute="bottom" constant="-83" id="Awx-QX-KAP"/>
+                            <constraint firstAttribute="bottom" secondItem="9ov-Xt-e3w" secondAttribute="bottom" constant="50" id="Dkd-Rl-UXU"/>
                             <constraint firstItem="FB1-UR-Hek" firstAttribute="leading" secondItem="wAz-10-WZ8" secondAttribute="leading" id="EzK-t5-shJ"/>
+                            <constraint firstItem="wAz-10-WZ8" firstAttribute="trailing" secondItem="9ov-Xt-e3w" secondAttribute="trailing" constant="140" id="F73-Tt-dv1"/>
+                            <constraint firstItem="9ov-Xt-e3w" firstAttribute="leading" secondItem="wAz-10-WZ8" secondAttribute="leading" constant="138" id="OjD-fd-eVB"/>
+                            <constraint firstItem="9ov-Xt-e3w" firstAttribute="top" secondItem="FB1-UR-Hek" secondAttribute="bottom" constant="-113" id="Txb-gB-BRY"/>
                             <constraint firstItem="wAz-10-WZ8" firstAttribute="trailing" secondItem="FB1-UR-Hek" secondAttribute="trailing" id="rpE-p4-Gwn"/>
                             <constraint firstItem="FB1-UR-Hek" firstAttribute="top" secondItem="wAz-10-WZ8" secondAttribute="top" id="xZ5-H2-L6G"/>
                         </constraints>
