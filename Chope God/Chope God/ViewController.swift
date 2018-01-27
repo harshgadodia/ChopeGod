@@ -11,6 +11,7 @@ import SceneKit
 import ARKit
 import ARCL
 import CoreLocation
+import FirebaseDatabase
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     
@@ -117,6 +118,33 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         }
         
         print("Lat: \(location.coordinate.latitude) || Long: \(location.coordinate.longitude) || Altitude: \(location.altitude)")
+    }
+    
+    //MARK: - Add to Firebase
+    func addNode() {
+        if let currentLocation = sceneLocationView.currentLocation() {
+            let location = CLLocation(coordinate: currentLocation.coordinate, altitude: currentLocation.altitude - 0.5)
+            addToFirebase(location: location)
+            let pinLocationNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
+            pinLocationNode.scaleRelativeToDistance = true
+            sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+        }
+    }
+    
+    func addToFirebase(location: CLLocation) {
+        let locationsDB = Database.database().reference().child("locations")
+        let locationsDict = ["lat" : location.coordinate.latitude,
+                             "long" : location.coordinate.longitude,
+                             "alt" : location.altitude]
+        locationsDB.childByAutoId().setValue(locationsDict) {
+            (error, reference) in
+            
+            if error != nil {
+                print(error!)
+            } else {
+                print("location saved successfully!")
+            }
+        }
     }
     
 }
