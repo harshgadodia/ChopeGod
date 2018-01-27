@@ -11,10 +11,13 @@ import SceneKit
 import ARKit
 import ARCL
 import CoreLocation
+import MapKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     
     var sceneLocationView = SceneLocationView()
+    let locationManager = CLLocationManager()
+    var lastLocation = CLLocation()
 
     @IBOutlet var sceneView: ARSCNView!
     
@@ -38,6 +41,28 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Add feature points
         sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+        
+        // Get location data
+        // Ask for Authorisation from the User.
+        self.locationManager.requestAlwaysAuthorization()
+        
+        // For use in foreground
+        self.locationManager.requestWhenInUseAuthorization()
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count - 1]
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            lastLocation = location
+        }
+        print("locations = \(location.coordinate.latitude) \(location.coordinate.longitude)")
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,19 +127,32 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        if let touch = touches.first {
-//            let touchLocation = touch.location(in: sceneView)
-//
-//            let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
-//
-//            if !results.isEmpty {
-//                print("Touched in plane")
-//            } else {
-//                print("Touched somewhere else")
-//            }
-//        }
-//    }
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            let touchLocation = touch.location(in: sceneView)
+
+            let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
+
+            if let hitResult = results.first {
+                
+                // Create a new scene
+                let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
+                
+                if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+                    
+                    diceNode.position = SCNVector3(
+                        x: hitResult.worldTransform.columns.3.x,
+                        y: hitResult.worldTransform.columns.3.y + diceNode.boundingSphere.radius,
+                        z: hitResult.worldTransform.columns.3.z
+                    )
+                    
+                    sceneView.scene.rootNode.addChildNode(diceNode)
+                    
+                }
+                
+            }
+        }
+    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
