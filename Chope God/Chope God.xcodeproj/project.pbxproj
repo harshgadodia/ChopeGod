@@ -13,6 +13,7 @@
 		3A533512201C3667001A985B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A533510201C3667001A985B /* Main.storyboard */; };
 		3A533514201C3667001A985B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A533513201C3667001A985B /* Assets.xcassets */; };
 		3A533517201C3667001A985B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A533515201C3667001A985B /* LaunchScreen.storyboard */; };
+		6DFF57FDCD8E819EF6912B99 /* Pods_Chope_God.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A6CF39CA45C4CBA1936E65 /* Pods_Chope_God.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		3A533513201C3667001A985B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A533516201C3667001A985B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A533518201C3667001A985B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		66810698E2C3812BD53EEEF1 /* Pods-Chope God.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chope God.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chope God/Pods-Chope God.debug.xcconfig"; sourceTree = "<group>"; };
+		A756C1B0DCCCE90C6D2F3EC9 /* Pods-Chope God.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chope God.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chope God/Pods-Chope God.release.xcconfig"; sourceTree = "<group>"; };
+		E1A6CF39CA45C4CBA1936E65 /* Pods_Chope_God.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chope_God.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6DFF57FDCD8E819EF6912B99 /* Pods_Chope_God.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				3A533509201C3667001A985B /* Chope God */,
 				3A533508201C3667001A985B /* Products */,
+				3DE3EB28FB5899152F94088E /* Pods */,
+				85A1A6057E8878A444A0BECA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,23 @@
 			path = "Chope God";
 			sourceTree = "<group>";
 		};
+		3DE3EB28FB5899152F94088E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				66810698E2C3812BD53EEEF1 /* Pods-Chope God.debug.xcconfig */,
+				A756C1B0DCCCE90C6D2F3EC9 /* Pods-Chope God.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		85A1A6057E8878A444A0BECA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1A6CF39CA45C4CBA1936E65 /* Pods_Chope_God.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +98,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A53351B201C3667001A985B /* Build configuration list for PBXNativeTarget "Chope God" */;
 			buildPhases = (
+				C92729D22F82AB700D84B148 /* [CP] Check Pods Manifest.lock */,
 				3A533503201C3667001A985B /* Sources */,
 				3A533504201C3667001A985B /* Frameworks */,
 				3A533505201C3667001A985B /* Resources */,
+				7AAFDCBAF1C89723F226807B /* [CP] Embed Pods Frameworks */,
+				9C46A7596C3F88150591A2E4 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -134,6 +161,60 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7AAFDCBAF1C89723F226807B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Chope God/Pods-Chope God-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ARCL/ARCL.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ARCL.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chope God/Pods-Chope God-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C46A7596C3F88150591A2E4 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chope God/Pods-Chope God-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C92729D22F82AB700D84B148 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Chope God-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		3A533503201C3667001A985B /* Sources */ = {
@@ -276,13 +357,15 @@
 		};
 		3A53351C201C3667001A985B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 66810698E2C3812BD53EEEF1 /* Pods-Chope God.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HP2VYGYS5H;
+				DEVELOPMENT_TEAM = FH2EF8NL6A;
 				INFOPLIST_FILE = "Chope God/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harsh.Chope-God";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.karrui.Chope-God";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -291,13 +374,15 @@
 		};
 		3A53351D201C3667001A985B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A756C1B0DCCCE90C6D2F3EC9 /* Pods-Chope God.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = HP2VYGYS5H;
+				DEVELOPMENT_TEAM = FH2EF8NL6A;
 				INFOPLIST_FILE = "Chope God/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.harsh.Chope-God";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.karrui.Chope-God";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
