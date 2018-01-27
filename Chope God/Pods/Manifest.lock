@@ -1,12 +1,18 @@
 PODS:
   - ARCL (1.0.2)
+  - DynamicBlurView (2.0.2)
+  - PopupDialog (0.7.0):
+    - DynamicBlurView (~> 2.0)
 
 DEPENDENCIES:
   - ARCL
+  - PopupDialog (~> 0.6)
 
 SPEC CHECKSUMS:
   ARCL: 88300cadfbdd6a9288ca17ad18d3ac972d6cb1e6
+  DynamicBlurView: aa6db4defc6e537eb86fc5e58dd3991666178399
+  PopupDialog: 4abc6db5b22b7c8029e2162bde8891ee6aa4b6c8
 
-PODFILE CHECKSUM: ede69d6f9c25c6db5ce2cad7a0dc51da3e768a76
+PODFILE CHECKSUM: 0902b8a4a33f2175c57a38202e42b934cd4f07bd
 
 COCOAPODS: 1.4.0
