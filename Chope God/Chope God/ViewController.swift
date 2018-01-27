@@ -12,10 +12,12 @@ import ARKit
 import ARCL
 import CoreLocation
 import PopupDialog
+import FirebaseDatabase
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     
     var sceneLocationView = SceneLocationView()
+    let locationManager = CLLocationManager()
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var addNewObjectButton: UIButton!
@@ -100,10 +102,27 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         sceneView.showsStatistics = true
         
         // Create a new scene
-        let scene = SCNScene(named: "art.scnassets/ship.scn")!
+        //let scene = SCNScene(named: "art.scnassets/ship.scn")!
         
         // Set the scene to the view
-        sceneView.scene = scene
+        //sceneView.scene = scene
+        
+        // Set up location manager
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+        
+        // Load chopes
+        //Currently set to Cinammon Dining Hall
+        let pinCoordinate = CLLocationCoordinate2D(latitude: 1.30631563896222, longitude: 103.773329239156)
+        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 23)
+        let pinImage = UIImage(named: "pin")!
+        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
+        pinLocationNode.scaleRelativeToDistance = true
+        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+        
+        view.addSubview(sceneLocationView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -194,23 +213,40 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
     }
     
-    // MARK: - Saving plane info
-//    func makePlane(from planeInfo: PlaneInfo) -> SCNNode { // call this when you place content
-//        let extent = planeInfo.extent
-//        let center = float4(planeInfo.center, 1) * planeInfo.transform
-//        // we're positioning content in world space, so center is now
-//        // an offset relative to transform
-//
-//        let plane = SCNPlane(width: CGFloat(extent.x), height: CGFloat(extent.z))
-//        let planeNode = SCNNode(geometry: plane)
-//        planeNode.eulerAngles.x = .pi / 2
-//        planeNode.simdPosition = center.xyz
-//
-//        return planeNode
-//    }
+    //MARK: - Location Manager Delegate Methods
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count - 1]
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+        }
+        
+        print("Lat: \(location.coordinate.latitude) || Long: \(location.coordinate.longitude) || Altitude: \(location.altitude)")
+    }
     
-    // load the image chosen using the imageNumber
-//    func loadImageChosen(from planeInfo: PlaneInfo) {
-//
-//    }
+    //MARK: - Add to Firebase
+    func addNode() {
+        if let currentLocation = sceneLocationView.currentLocation() {
+            let location = CLLocation(coordinate: currentLocation.coordinate, altitude: currentLocation.altitude - 0.5)
+            addToFirebase(location: location)
+            let pinLocationNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
+            pinLocationNode.scaleRelativeToDistance = true
+            sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+        }
+    }
+    
+    func addToFirebase(location: CLLocation) {
+        let locationsDB = Database.database().reference().child("locations")
+        let locationsDict = ["lat" : location.coordinate.latitude,
+                             "long" : location.coordinate.longitude,
+                             "alt" : location.altitude]
+        locationsDB.childByAutoId().setValue(locationsDict) {
+            (error, reference) in
+            
+            if error != nil {
+                print(error!)
+            } else {
+                print("location saved successfully!")
+            }
+        }
+    }
 }
