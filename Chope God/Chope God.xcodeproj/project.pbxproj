@@ -13,9 +13,13 @@
 		3A533512201C3667001A985B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A533510201C3667001A985B /* Main.storyboard */; };
 		3A533514201C3667001A985B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A533513201C3667001A985B /* Assets.xcassets */; };
 		3A533517201C3667001A985B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A533515201C3667001A985B /* LaunchScreen.storyboard */; };
+		800012DC2F9AE42329B1E5B6 /* Pods_Chope_God.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF8EAF44D210AF6E48C79F5 /* Pods_Chope_God.framework */; };
+		97D6EAE7201C4DA100C8F6C6 /* PlaneInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97D6EAE6201C4DA100C8F6C6 /* PlaneInfo.swift */; };
+		97D6EAE9201C522500C8F6C6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 97D6EAE8201C522500C8F6C6 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09A76D074D8EBD5688CCEE70 /* Pods-Chope God.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chope God.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chope God/Pods-Chope God.release.xcconfig"; sourceTree = "<group>"; };
 		3A533507201C3667001A985B /* Chope God.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chope God.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A53350A201C3667001A985B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3A53350C201C3667001A985B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
@@ -24,6 +28,10 @@
 		3A533513201C3667001A985B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A533516201C3667001A985B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A533518201C3667001A985B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		97D6EAE6201C4DA100C8F6C6 /* PlaneInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneInfo.swift; sourceTree = "<group>"; };
+		97D6EAE8201C522500C8F6C6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DA12C2E70FDC5585D465FB49 /* Pods-Chope God.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chope God.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chope God/Pods-Chope God.debug.xcconfig"; sourceTree = "<group>"; };
+		FBF8EAF44D210AF6E48C79F5 /* Pods_Chope_God.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chope_God.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				800012DC2F9AE42329B1E5B6 /* Pods_Chope_God.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +51,8 @@
 			children = (
 				3A533509201C3667001A985B /* Chope God */,
 				3A533508201C3667001A985B /* Products */,
+				9656E10E8DA77666E73FFE4D /* Pods */,
+				8DA4E9A431773AC5CC0973ED /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -59,12 +70,31 @@
 				3A53350A201C3667001A985B /* AppDelegate.swift */,
 				3A53350C201C3667001A985B /* art.scnassets */,
 				3A53350E201C3667001A985B /* ViewController.swift */,
+				97D6EAE6201C4DA100C8F6C6 /* PlaneInfo.swift */,
 				3A533510201C3667001A985B /* Main.storyboard */,
 				3A533513201C3667001A985B /* Assets.xcassets */,
 				3A533515201C3667001A985B /* LaunchScreen.storyboard */,
 				3A533518201C3667001A985B /* Info.plist */,
+				97D6EAE8201C522500C8F6C6 /* GoogleService-Info.plist */,
 			);
 			path = "Chope God";
+			sourceTree = "<group>";
+		};
+		8DA4E9A431773AC5CC0973ED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FBF8EAF44D210AF6E48C79F5 /* Pods_Chope_God.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9656E10E8DA77666E73FFE4D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DA12C2E70FDC5585D465FB49 /* Pods-Chope God.debug.xcconfig */,
+				09A76D074D8EBD5688CCEE70 /* Pods-Chope God.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +104,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A53351B201C3667001A985B /* Build configuration list for PBXNativeTarget "Chope God" */;
 			buildPhases = (
+				8899A8BF437E7A76AF32BB86 /* [CP] Check Pods Manifest.lock */,
 				3A533503201C3667001A985B /* Sources */,
 				3A533504201C3667001A985B /* Frameworks */,
 				3A533505201C3667001A985B /* Resources */,
+				BD6A5EE6CB89AD94342CA530 /* [CP] Embed Pods Frameworks */,
+				5FA552D1355BCAE0B9117F7D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -128,6 +161,7 @@
 			files = (
 				3A53350D201C3667001A985B /* art.scnassets in Resources */,
 				3A533517201C3667001A985B /* LaunchScreen.storyboard in Resources */,
+				97D6EAE9201C522500C8F6C6 /* GoogleService-Info.plist in Resources */,
 				3A533514201C3667001A985B /* Assets.xcassets in Resources */,
 				3A533512201C3667001A985B /* Main.storyboard in Resources */,
 			);
@@ -135,12 +169,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5FA552D1355BCAE0B9117F7D /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chope God/Pods-Chope God-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8899A8BF437E7A76AF32BB86 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Chope God-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BD6A5EE6CB89AD94342CA530 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Chope God/Pods-Chope God-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/ARCL/ARCL.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ARCL.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Chope God/Pods-Chope God-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3A533503201C3667001A985B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3A53350F201C3667001A985B /* ViewController.swift in Sources */,
+				97D6EAE7201C4DA100C8F6C6 /* PlaneInfo.swift in Sources */,
 				3A53350B201C3667001A985B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,6 +369,7 @@
 		};
 		3A53351C201C3667001A985B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DA12C2E70FDC5585D465FB49 /* Pods-Chope God.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -292,6 +386,7 @@
 		};
 		3A53351D201C3667001A985B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09A76D074D8EBD5688CCEE70 /* Pods-Chope God.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

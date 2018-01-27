@@ -9,13 +9,20 @@
 import UIKit
 import SceneKit
 import ARKit
+import ARCL
+import CoreLocation
 
 class ViewController: UIViewController, ARSCNViewDelegate {
+    
+    var sceneLocationView = SceneLocationView()
 
     @IBOutlet var sceneView: ARSCNView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        sceneLocationView.run()
+        view.addSubview(sceneLocationView)
         
         // Set the view's delegate
         sceneView.delegate = self
@@ -31,6 +38,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         // Add feature points
         sceneView.debugOptions = ARSCNDebugOptions.showFeaturePoints
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        sceneLocationView.frame = view.bounds
     }
     
     override func viewWillAppear(_ animated: Bool) {
