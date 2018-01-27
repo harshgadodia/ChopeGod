@@ -216,9 +216,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     //MARK: - Location Manager Delegate Methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count - 1]
-        if location.horizontalAccuracy > 0 {
-            locationManager.stopUpdatingLocation()
-        }
+//        if location.horizontalAccuracy > 0 {
+//            locationManager.stopUpdatingLocation()
+//        }
         
         print("Lat: \(location.coordinate.latitude) || Long: \(location.coordinate.longitude) || Altitude: \(location.altitude)")
     }

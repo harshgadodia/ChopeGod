@@ -12,9 +12,10 @@
 		3A53350D201C3667001A985B /* art.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A53350C201C3667001A985B /* art.scnassets */; };
 		3A53350F201C3667001A985B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A53350E201C3667001A985B /* ViewController.swift */; };
 		3A533512201C3667001A985B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A533510201C3667001A985B /* Main.storyboard */; };
-		3A533514201C3667001A985B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A533513201C3667001A985B /* Assets.xcassets */; };
 		3A533517201C3667001A985B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A533515201C3667001A985B /* LaunchScreen.storyboard */; };
 		6DFF57FDCD8E819EF6912B99 /* Pods_Chope_God.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A6CF39CA45C4CBA1936E65 /* Pods_Chope_God.framework */; };
+		9729BD0F201CC65C000333DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9729BD0E201CC65C000333DC /* Assets.xcassets */; };
+		9729BD11201CCC0A000333DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9729BD10201CCC0A000333DC /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,10 +25,11 @@
 		3A53350C201C3667001A985B /* art.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = art.scnassets; sourceTree = "<group>"; };
 		3A53350E201C3667001A985B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3A533511201C3667001A985B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3A533513201C3667001A985B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A533516201C3667001A985B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A533518201C3667001A985B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66810698E2C3812BD53EEEF1 /* Pods-Chope God.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chope God.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chope God/Pods-Chope God.debug.xcconfig"; sourceTree = "<group>"; };
+		9729BD0E201CC65C000333DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9729BD10201CCC0A000333DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A756C1B0DCCCE90C6D2F3EC9 /* Pods-Chope God.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chope God.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chope God/Pods-Chope God.release.xcconfig"; sourceTree = "<group>"; };
 		E1A6CF39CA45C4CBA1936E65 /* Pods_Chope_God.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chope_God.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -69,10 +71,10 @@
 				3A53350C201C3667001A985B /* art.scnassets */,
 				3A53350E201C3667001A985B /* ViewController.swift */,
 				3A533510201C3667001A985B /* Main.storyboard */,
-				3A533513201C3667001A985B /* Assets.xcassets */,
+				9729BD0E201CC65C000333DC /* Assets.xcassets */,
 				3A533515201C3667001A985B /* LaunchScreen.storyboard */,
 				3A533518201C3667001A985B /* Info.plist */,
-				3A36F0D3201CCC2900B47F12 /* GoogleService-Info.plist */,
+				9729BD10201CCC0A000333DC /* GoogleService-Info.plist */,
 			);
 			path = "Chope God";
 			sourceTree = "<group>";
@@ -158,8 +160,8 @@
 			files = (
 				3A53350D201C3667001A985B /* art.scnassets in Resources */,
 				3A533517201C3667001A985B /* LaunchScreen.storyboard in Resources */,
-				3A36F0D4201CCC2A00B47F12 /* GoogleService-Info.plist in Resources */,
-				3A533514201C3667001A985B /* Assets.xcassets in Resources */,
+				9729BD11201CCC0A000333DC /* GoogleService-Info.plist in Resources */,
+				9729BD0F201CC65C000333DC /* Assets.xcassets in Resources */,
 				3A533512201C3667001A985B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,7 +379,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FH2EF8NL6A;
 				INFOPLIST_FILE = "Chope God/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.karrui.Chope-God";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -394,7 +396,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FH2EF8NL6A;
 				INFOPLIST_FILE = "Chope God/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.karrui.Chope-God";
 				PRODUCT_NAME = "$(TARGET_NAME)";
