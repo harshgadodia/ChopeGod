@@ -15,6 +15,7 @@
 		6DFF57FDCD8E819EF6912B99 /* Pods_Chope_God.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1A6CF39CA45C4CBA1936E65 /* Pods_Chope_God.framework */; };
 		9729BD0F201CC65C000333DC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9729BD0E201CC65C000333DC /* Assets.xcassets */; };
 		9729BD11201CCC0A000333DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9729BD10201CCC0A000333DC /* GoogleService-Info.plist */; };
+		9729BD13201CE6D6000333DC /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729BD12201CE6D6000333DC /* Data.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		66810698E2C3812BD53EEEF1 /* Pods-Chope God.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chope God.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Chope God/Pods-Chope God.debug.xcconfig"; sourceTree = "<group>"; };
 		9729BD0E201CC65C000333DC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9729BD10201CCC0A000333DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		9729BD12201CE6D6000333DC /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		A756C1B0DCCCE90C6D2F3EC9 /* Pods-Chope God.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chope God.release.xcconfig"; path = "Pods/Target Support Files/Pods-Chope God/Pods-Chope God.release.xcconfig"; sourceTree = "<group>"; };
 		E1A6CF39CA45C4CBA1936E65 /* Pods_Chope_God.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chope_God.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -73,6 +75,7 @@
 				3A533515201C3667001A985B /* LaunchScreen.storyboard */,
 				3A533518201C3667001A985B /* Info.plist */,
 				9729BD10201CCC0A000333DC /* GoogleService-Info.plist */,
+				9729BD12201CE6D6000333DC /* Data.swift */,
 			);
 			path = "Chope God";
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A53350F201C3667001A985B /* ViewController.swift in Sources */,
+				9729BD13201CE6D6000333DC /* Data.swift in Sources */,
 				3A53350B201C3667001A985B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

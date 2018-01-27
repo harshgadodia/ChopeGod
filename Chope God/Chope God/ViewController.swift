@@ -18,73 +18,45 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     
     var sceneLocationView = SceneLocationView()
     let locationManager = CLLocationManager()
+    
+    var dataArray : [Data] = [Data]()
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var addNewObjectButton: UIButton!
     
     @IBAction func addNewObjectAction(_ sender: Any) {
         let title = "Chope your seat!"
-        let message = "Choose your object to reserve your seat with"
+        let message = "Enter your name!"
         
         let popup = PopupDialog(title: title, message: message)
         
         // Create buttons
-        let buttonOne = CancelButton(title: "Dice") {
-            // Create a new scene
-            let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
-            
-            if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
-                
-                diceNode.position = SCNVector3(
-//                    x: hitResult.worldTransform.columns.3.x,
-//                    y: hitResult.worldTransform.columns.3.y + diceNode.boundingSphere.radius,
-//                    z: hitResult.worldTransform.columns.3.z
-                )
-                
-                self.sceneView.scene.rootNode.addChildNode(diceNode)
-                
-            }
-        }
-        
-        // This button will not the dismiss the dialog
-        let buttonTwo = DefaultButton(title: "Starbucks") {
-            // Create a new scene
-            let antScene = SCNScene(named: "art.scnassets/StrBucks.scn")!
-            
-            if let antNode = antScene.rootNode.childNode(withName: "ant", recursively: true) {
-                
-                antNode.position = SCNVector3(
-//                    x: hitResult.worldTransform.columns.3.x,
-//                    y: hitResult.worldTransform.columns.3.y + antNode.boundingSphere.radius,
-//                    z: hitResult.worldTransform.columns.3.z
-                )
-                
-                self.sceneView.scene.rootNode.addChildNode(antNode)
-                
-            }
+        let buttonOne = DefaultButton(title: "Click me!") {
             
         }
         
-        let buttonThree = DefaultButton(title: "Courage the Cowardly Dog", height: 60) {
-            // Create a new scene
-            let courageScene = SCNScene(named: "art.scnassets/courage_apply.scn")!
-            
-            if let courageNode = courageScene.rootNode.childNode(withName: "courage", recursively: true) {
-                
-                courageNode.position = SCNVector3(
-//                    x: hitResult.worldTransform.columns.3.x,
-//                    y: hitResult.worldTransform.columns.3.y + courageNode.boundingSphere.radius,
-//                    z: hitResult.worldTransform.columns.3.z
-                )
-                
-                self.sceneView.scene.rootNode.addChildNode(courageNode)
-                
-            }
+        locationManager.startUpdatingLocation()
+        
+        popup.addButtons([buttonOne])
+        
+        //1. Create the alert controller.
+        let alert = UIAlertController(title: "Chope your space!", message: "Enter your name!", preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.text = "Some default text"
         }
         
-        popup.addButtons([buttonOne, buttonTwo, buttonThree])
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            print("Text field: \(textField?.text ?? "nothing entered")")
+            //Add name and location to Firebase!
+            self.addNode(name: textField!.text!)
+        }))
         
-        self.present(popup, animated: true, completion: nil)
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
         
     }
     override func viewDidLoad() {
@@ -119,14 +91,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         locationManager.startUpdatingLocation()
         
         // Load chopes
-        //Currently set to Cinammon Dining Hall
-        let pinCoordinate = CLLocationCoordinate2D(latitude: 1.30631563896222, longitude: 103.773329239156)
-        let pinLocation = CLLocation(coordinate: pinCoordinate, altitude: 23)
-        let pinImage = UIImage(named: "pin")!
-        let pinLocationNode = LocationAnnotationNode(location: pinLocation, image: pinImage)
-        pinLocationNode.scaleRelativeToDistance = true
-        sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
-        
+        retrieveData()
         view.addSubview(sceneLocationView)
     }
     
@@ -158,27 +123,27 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         // Release any cached data, images, etc that aren't in use.
     }
     
-    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
-        if anchor is ARPlaneAnchor {
-            let planeAnchor = anchor as! ARPlaneAnchor
-            let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x) , height: CGFloat(planeAnchor.extent.z))
-            
-            let planeNode = SCNNode()
-            planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
-            planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
-            
-            let gridMaterial = SCNMaterial()
-            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
-            
-            plane.materials = [gridMaterial]
-            planeNode.geometry = plane
-            
-            //Add child node to plane
-            node.addChildNode(planeNode)
-        } else {
-            return
-        }
-    }
+//    func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
+//        if anchor is ARPlaneAnchor {
+//            let planeAnchor = anchor as! ARPlaneAnchor
+//            let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x) , height: CGFloat(planeAnchor.extent.z))
+//
+//            let planeNode = SCNNode()
+//            planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
+//            planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
+//
+//            let gridMaterial = SCNMaterial()
+//            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
+//
+//            plane.materials = [gridMaterial]
+//            planeNode.geometry = plane
+//
+//            //Add child node to plane
+//            node.addChildNode(planeNode)
+//        } else {
+//            return
+//        }
+//    }
 
     // MARK: - ARSCNViewDelegate
     
@@ -191,17 +156,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     }
 */
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if let touch = touches.first {
-            let touchLocation = touch.location(in: sceneView)
-            
-            let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
-            
-            if let hitResult = results.first {
-       
-            }
-        }
-    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let touch = touches.first {
+//            let touchLocation = touch.location(in: sceneView)
+//
+//            let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
+//
+//            if let hitResult = results.first {
+//
+//            }
+//        }
+//    }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
@@ -221,29 +186,30 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     //MARK: - Location Manager Delegate Methods
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         let location = locations[locations.count - 1]
-//        if location.horizontalAccuracy > 0 {
-//            locationManager.stopUpdatingLocation()
-//        }
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+        }
         
         print("Lat: \(location.coordinate.latitude) || Long: \(location.coordinate.longitude) || Altitude: \(location.altitude)")
     }
     
     //MARK: - Add to Firebase
-    func addNode() {
+    func addNode(name: String) {
         if let currentLocation = sceneLocationView.currentLocation() {
             let location = CLLocation(coordinate: currentLocation.coordinate, altitude: currentLocation.altitude - 0.5)
-            addToFirebase(location: location)
+            addToFirebase(location: location, name: name)
             let pinLocationNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
             pinLocationNode.scaleRelativeToDistance = true
             sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
         }
     }
     
-    func addToFirebase(location: CLLocation) {
+    func addToFirebase(location: CLLocation, name: String) {
         let locationsDB = Database.database().reference().child("locations")
-        let locationsDict = ["lat" : location.coordinate.latitude,
-                             "long" : location.coordinate.longitude,
-                             "alt" : location.altitude]
+        let locationsDict = ["lat" : String(location.coordinate.latitude),
+                             "long" : String(location.coordinate.longitude),
+                             "alt" : String(location.altitude),
+                             "name" : name]
         locationsDB.childByAutoId().setValue(locationsDict) {
             (error, reference) in
             
@@ -252,6 +218,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             } else {
                 print("location saved successfully!")
             }
+        }
+    }
+    
+    //MARK: - Retrieve from Firebase
+    func retrieveData() {
+        print("Retrieving data!")
+        let dataDB = Database.database().reference().child("locations")
+        dataDB.observe(.childAdded) { (snapshot) in
+            let snapshotValue = snapshot.value as! Dictionary<String, String>
+            let lat = snapshotValue["lat"]!
+            let long = snapshotValue["long"]!
+            let alt = snapshotValue["alt"]!
+            let name = snapshotValue["name"]!
+            
+            let data = Data(lat: lat, long: long, alt: alt, name: name)
+            self.dataArray.append(data)
+        }
+        displayNodes(dataArray: self.dataArray)
+    }
+    
+    func displayNodes(dataArray: [Data]) {
+        dataArray.forEach { (data) in
+            
+            let twoDLocation = CLLocationCoordinate2D(latitude: Double(data.lat)!, longitude: Double(data.long)!)
+            
+            let location = CLLocation(coordinate: twoDLocation, altitude: Double(data.alt)!)
+            let pinLocationNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
+            pinLocationNode.scaleRelativeToDistance = true
+            self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+            
+            print("loaded lat: \(data.lat), long: \(data.long), alt: \(data.alt)")
         }
     }
 }
