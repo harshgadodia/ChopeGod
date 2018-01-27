@@ -8,5 +8,6 @@ target 'Chope God' do
   # Pods for Chope God
   pod 'Firebase/Core'
   pod 'ARCL'
+  pod 'PopupDialog', '~> 0.6'
 
 end

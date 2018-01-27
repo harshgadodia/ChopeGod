@@ -12,6 +12,7 @@ import ARKit
 import ARCL
 import CoreLocation
 import MapKit
+import PopupDialog
 
 class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDelegate {
     
@@ -135,20 +136,70 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
 
             if let hitResult = results.first {
                 
-                // Create a new scene
-                let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
+                let title = "Chope your seat!"
+                let message = "Choose your object to reserve your seat with"
                 
-                if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+                let popup = PopupDialog(title: title, message: message)
+                
+                // Create buttons
+                let buttonOne = CancelButton(title: "Dice") {
+                    // Create a new scene
+                    let diceScene = SCNScene(named: "art.scnassets/diceCollada.scn")!
                     
-                    diceNode.position = SCNVector3(
-                        x: hitResult.worldTransform.columns.3.x,
-                        y: hitResult.worldTransform.columns.3.y + diceNode.boundingSphere.radius,
-                        z: hitResult.worldTransform.columns.3.z
-                    )
-                    
-                    sceneView.scene.rootNode.addChildNode(diceNode)
-                    
+                    if let diceNode = diceScene.rootNode.childNode(withName: "Dice", recursively: true) {
+                        
+                        diceNode.position = SCNVector3(
+                            x: hitResult.worldTransform.columns.3.x,
+                            y: hitResult.worldTransform.columns.3.y + diceNode.boundingSphere.radius,
+                            z: hitResult.worldTransform.columns.3.z
+                        )
+                        
+                        self.sceneView.scene.rootNode.addChildNode(diceNode)
+                        
+                    }
                 }
+                
+                // This button will not the dismiss the dialog
+                let buttonTwo = DefaultButton(title: "Starbucks") {
+                    // Create a new scene
+                    let antScene = SCNScene(named: "art.scnassets/StrBucks.scn")!
+                    
+                    if let antNode = antScene.rootNode.childNode(withName: "ant", recursively: true) {
+                        
+                        antNode.position = SCNVector3(
+                            x: hitResult.worldTransform.columns.3.x,
+                            y: hitResult.worldTransform.columns.3.y + antNode.boundingSphere.radius,
+                            z: hitResult.worldTransform.columns.3.z
+                        )
+                        
+                        self.sceneView.scene.rootNode.addChildNode(antNode)
+                        
+                    }
+
+                }
+                
+                let buttonThree = DefaultButton(title: "Courage the Cowardly Dog", height: 60) {
+                    // Create a new scene
+                    let courageScene = SCNScene(named: "art.scnassets/courage_apply.scn")!
+                    
+                    if let courageNode = courageScene.rootNode.childNode(withName: "courage", recursively: true) {
+                        
+                        courageNode.position = SCNVector3(
+                            x: hitResult.worldTransform.columns.3.x,
+                            y: hitResult.worldTransform.columns.3.y + courageNode.boundingSphere.radius,
+                            z: hitResult.worldTransform.columns.3.z
+                        )
+                        
+                        self.sceneView.scene.rootNode.addChildNode(courageNode)
+                        
+                    }
+                }
+                
+                popup.addButtons([buttonOne, buttonTwo, buttonThree])
+                
+                self.present(popup, animated: true, completion: nil)
+                
+
                 
             }
         }
