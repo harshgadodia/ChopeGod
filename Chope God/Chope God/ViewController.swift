@@ -11,11 +11,48 @@ import SceneKit
 import ARKit
 
 class ViewController: UIViewController, ARSCNViewDelegate {
+    
+    enum ARCoffeeSessionState: String, CustomStringConvertible {
+        case initialized = "initialized", ready = "ready", temporarilyUnavailable = "temporarily unavailable", failed = "failed"
+        
+        var description: String {
+            switch self {
+            case .initialized:
+                return "👀 Look for a plane to place your coffee"
+            case .ready:
+                return "☕️ Click any plane to place your coffee!"
+            case .temporarilyUnavailable:
+                return "😱 Adjusting caffeine levels. Please wait"
+            case .failed:
+                return "⛔️ Caffeine crisis! Please restart App."
+            }
+        }
+    }
+
+    var currentCaffeineStatus = ARCoffeeSessionState.initialized {
+        didSet {
+            DispatchQueue.main.async { self.statusLabel.text = self.currentCaffeineStatus.description }
+            if currentCaffeineStatus == .failed {
+                cleanupARSession()
+            }
+        }
+    }
+    
+    func cleanupARSession() {
+        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) -> Void in
+            node.removeFromParentNode()
+        }
+    }
+
 
     @IBOutlet var sceneView: ARSCNView!
     
-    var nodeModel:SCNNode!
-    let nodeName = "ant"
+    var antNode:SCNNode!
+    
+    func initializeAntNode() {
+        let antScene = SCNScene(named: "ant.dae")!
+        self.antNode = antScene.rootNode.childNode(withName: "ant", recursively: true)!
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,43 +81,75 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         let modelScene = SCNScene(named:
             "art.scnassets/ant.scn")!
         
-        nodeModel =  modelScene.rootNode.childNode(
-            withName: nodeName, recursively: true)
+//        nodeModel =  modelScene.rootNode.childNode(
+//            withName: nodeName, recursively: true)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let location = touches.first!.location(in: sceneView)
-        var hitTestOptions = [SCNHitTestOption: Any]()
-        hitTestOptions[SCNHitTestOption.boundingBoxOnly] = true
-        let hitResults: [SCNHitTestResult]  =
-            sceneView.hitTest(location, options: hitTestOptions)
-        if let hit = hitResults.first {
-            if let node = getParent(hit.node) {
-                node.removeFromParentNode()
-                return
-            }
+        
+        guard let touch = touches.first else {
+            print("Unable to identify touches on any plane. Ignoring interaction...")
+            return
         }
-        let hitResultsFeaturePoints: [ARHitTestResult] =
-            sceneView.hitTest(location, types: .featurePoint)
-        if let hit = hitResultsFeaturePoints.first {
-            sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
+        if currentCaffeineStatus != .ready {
+            print("Unable to place objects when the planes are not ready...")
+            return
         }
+        
+        let touchPoint = touch.location(in: sceneView)
+        if let plane = virtualPlaneProperlySet(touchPoint: touchPoint) {
+            print("Plane touched: \(plane)")
+            addCoffeeToPlane(plane: plane, atPoint: touchPoint)
+        }
+        
+//        let location = touches.first!.location(in: sceneView)
+//        var hitTestOptions = [SCNHitTestOption: Any]()
+//        hitTestOptions[SCNHitTestOption.boundingBoxOnly] = true
+//        let hitResults: [SCNHitTestResult]  =
+//            sceneView.hitTest(location, options: hitTestOptions)
+//        if let hit = hitResults.first {
+//            if let node = getParent(hit.node) {
+//                node.removeFromParentNode()
+//                return
+//            }
+//        }
+//        let hitResultsFeaturePoints: [ARHitTestResult] =
+//            sceneView.hitTest(location, types: .featurePoint)
+//        if let hit = hitResultsFeaturePoints.first {
+//            sceneView.session.add(anchor: ARAnchor(transform: hit.worldTransform))
+//        }
     }
     
-    func getParent(_ nodeFound: SCNNode?) -> SCNNode? {
-        if let node = nodeFound {
-            if node.name == nodeName {
-                return node
-            } else if let parent = node.parent {
-                return getParent(parent)
-            }
+    func virtualPlaneProperlySet(touchPoint: CGPoint) -> VirtualPlane? {
+        let hits = sceneView.hitTest(touchPoint, types: .existingPlaneUsingExtent)
+        if hits.count > 0, let firstHit = hits.first, let identifier = firstHit.anchor?.identifier, let plane = planes[identifier] {
+            self.selectedPlane = plane
+            return plane
         }
         return nil
     }
     
+//    func getParent(_ nodeFound: SCNNode?) -> SCNNode? {
+//        if let node = nodeFound {
+//            if node.name == nodeName {
+//                return node
+//            } else if let parent = node.parent {
+//                return getParent(parent)
+//            }
+//        }
+//        return nil
+//    }
 
-    
-    
+    func addCoffeeToPlane(plane: VirtualPlane, atPoint point: CGPoint) {
+        let hits = sceneView.hitTest(point, types: .existingPlaneUsingExtent)
+        if hits.count > 0, let firstHit = hits.first {
+            if let anotherAntYesPlease = antNode?.clone() {
+                anotherAntYesPlease.position = SCNVector3Make(firstHit.worldTransform.columns.3.x, firstHit.worldTransform.columns.3.y, firstHit.worldTransform.columns.3.z)
+                sceneView.scene.rootNode.addChildNode(anotherAntYesPlease)
+            }
+        }
+    }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -117,34 +186,33 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         
-        if !anchor.isKind(of: ARPlaneAnchor.self) {
-            DispatchQueue.main.async {
-                let modelClone = self.nodeModel.clone()
-                modelClone.position = SCNVector3Zero
-                
-                // Add model as a child of the node
-                node.addChildNode(modelClone)
-            }
-        }
-//        if anchor is ARPlaneAnchor {
-//            let planeAnchor = anchor as! ARPlaneAnchor
-//            let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x) , height: CGFloat(planeAnchor.extent.z))
-//
-//            let planeNode = SCNNode()
-//            planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
-//            planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
-//
-//            let gridMaterial = SCNMaterial()
-//            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
-//
-//            plane.materials = [gridMaterial]
-//            planeNode.geometry = plane
-//
-//            //Add child node to plane
-//            node.addChildNode(planeNode)
-//        } else {
-//            return
+//        if !anchor.isKind(of: ARPlaneAnchor.self) {
+//            DispatchQueue.main.async {
+//                let modelClone = self.nodeModel.clone()
+//                modelClone.position = SCNVector3Zero
+//                // Add model as a child of the node
+//                node.addChildNode(modelClone)
+//            }
 //        }
+        if anchor is ARPlaneAnchor {
+            let planeAnchor = anchor as! ARPlaneAnchor
+            let plane = SCNPlane(width: CGFloat(planeAnchor.extent.x) , height: CGFloat(planeAnchor.extent.z))
+
+            let planeNode = SCNNode()
+            planeNode.position = SCNVector3(x: planeAnchor.center.x, y: 0, z: planeAnchor.center.z)
+            planeNode.transform = SCNMatrix4MakeRotation(-Float.pi/2, 1, 0, 0)
+
+            let gridMaterial = SCNMaterial()
+            gridMaterial.diffuse.contents = UIImage(named: "art.scnassets/grid.png")
+
+            plane.materials = [gridMaterial]
+            planeNode.geometry = plane
+
+            //Add child node to plane
+            node.addChildNode(planeNode)
+        } else {
+            return
+        }
     }
     
     func session(_ session: ARSession, didFailWithError error: Error) {
