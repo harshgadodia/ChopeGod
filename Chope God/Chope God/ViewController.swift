@@ -66,6 +66,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 //        return node
 //    }
     
+    // Render the horizontal plane
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if anchor is ARPlaneAnchor {
             let planeAnchor = anchor as! ARPlaneAnchor
@@ -88,6 +89,20 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        if let touch = touches.first {
+//            let touchLocation = touch.location(in: sceneView)
+//
+//            let results = sceneView.hitTest(touchLocation, types: .existingPlaneUsingExtent)
+//
+//            if !results.isEmpty {
+//                print("Touched in plane")
+//            } else {
+//                print("Touched somewhere else")
+//            }
+//        }
+//    }
+    
     func session(_ session: ARSession, didFailWithError error: Error) {
         // Present an error message to the user
         
@@ -100,6 +115,26 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func sessionInterruptionEnded(_ session: ARSession) {
         // Reset tracking and/or remove existing anchors if consistent tracking is required
+        
+    }
+    
+    // MARK: - Saving plane info
+    func makePlane(from planeInfo: PlaneInfo) -> SCNNode { // call this when you place content
+        let extent = planeInfo.extent
+        let center = float4(planeInfo.center, 1) * planeInfo.transform
+        // we're positioning content in world space, so center is now
+        // an offset relative to transform
+        
+        let plane = SCNPlane(width: CGFloat(extent.x), height: CGFloat(extent.z))
+        let planeNode = SCNNode(geometry: plane)
+        planeNode.eulerAngles.x = .pi / 2
+        planeNode.simdPosition = center.xyz
+        
+        return planeNode
+    }
+    
+    // load the image chosen using the imageNumber
+    func loadImageChosen(from planeInfo: PlaneInfo) {
         
     }
 }
