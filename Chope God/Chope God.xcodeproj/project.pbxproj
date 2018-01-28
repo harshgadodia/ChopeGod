@@ -377,7 +377,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 66810698E2C3812BD53EEEF1 /* Pods-Chope God.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FH2EF8NL6A;
 				INFOPLIST_FILE = "Chope God/Info.plist";
@@ -394,7 +393,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A756C1B0DCCCE90C6D2F3EC9 /* Pods-Chope God.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = FH2EF8NL6A;
 				INFOPLIST_FILE = "Chope God/Info.plist";

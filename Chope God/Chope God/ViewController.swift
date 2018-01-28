@@ -40,11 +40,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         popup.addButtons([buttonOne])
         
         //1. Create the alert controller.
-        let alert = UIAlertController(title: "Chope your space!", message: "Enter your name!", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Chope Your Space!", message: "Enter Your Name", preferredStyle: .alert)
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
-            textField.text = "Some default text"
+            textField.text = "Kia Sue"
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
@@ -62,9 +62,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
+        let button = UIButton(frame: CGRect(x: sceneLocationView.bounds.midX, y: 200, width: 100, height: 50))
         button.backgroundColor = .green
-        button.setTitle("Test Button", for: .normal)
+        button.setTitle("+", for: .normal)
         button.addTarget(self, action: #selector(addNewObjectAction), for: .touchUpInside)
         
         sceneLocationView.run()
