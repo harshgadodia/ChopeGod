@@ -25,7 +25,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     @IBOutlet weak var addNewObjectButton: UIButton!
     
     @IBAction func addNewObjectAction(_ sender: Any) {
-        //locationManager.startUpdatingLocation()
+        locationManager.startUpdatingLocation()
         
         //1. Create the alert controller.
         let alert = UIAlertController(title: "Chope Your Space!", message: "Enter Your Name", preferredStyle: .alert)
@@ -194,6 +194,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             let pinLocationNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
             pinLocationNode.scaleRelativeToDistance = true
             sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+            sceneLocationView.bringSubview(toFront: sceneLocationView)
         }
     }
     
