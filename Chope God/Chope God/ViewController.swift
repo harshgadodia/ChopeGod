@@ -60,9 +60,6 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         button.setTitle("+", for: .normal)
         button.addTarget(self, action: #selector(addNewObjectAction), for: .touchUpInside)
         
-        sceneLocationView.run()
-        view.addSubview(sceneLocationView)
-        
         sceneLocationView.addSubview(button)
         
         // Set the view's delegate
@@ -85,6 +82,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
         
         // Load chopes
         retrieveData()
+        sceneLocationView.run()
         view.addSubview(sceneLocationView)
     }
     
@@ -102,6 +100,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
 
         // Run the view's session
         sceneView.session.run(configuration)
+        sceneLocationView.run()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -194,7 +193,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             let pinLocationNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
             pinLocationNode.scaleRelativeToDistance = true
             sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
-            sceneLocationView.bringSubview(toFront: sceneLocationView)
+            view.bringSubview(toFront: sceneLocationView)
         }
     }
     
