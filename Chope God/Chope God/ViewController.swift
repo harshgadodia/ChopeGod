@@ -54,6 +54,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             //Add name and location to Firebase!
             self.addNode(name: textField!.text!)
         }))
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { [weak alert] (_) in
+            alert?.dismiss(animated: true, completion: {
+            })
+        }))
+        
         
         // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
