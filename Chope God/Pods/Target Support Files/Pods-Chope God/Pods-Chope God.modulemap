@@ -1,0 +1,6 @@
+framework module Pods_Chope_God {
+  umbrella header "Pods-Chope God-umbrella.h"
+
+  export *
+  module * { export * }
+}
