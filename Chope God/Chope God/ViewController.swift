@@ -55,7 +55,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let button = UIButton(frame: CGRect(x: sceneLocationView.bounds.midX, y: 200, width: 100, height: 50))
+        let button = UIButton(frame: CGRect(x: sceneLocationView.bounds.midX, y: 700, width: 100, height: 50))
         button.backgroundColor = .green
         button.setTitle("+", for: .normal)
         button.addTarget(self, action: #selector(addNewObjectAction), for: .touchUpInside)
