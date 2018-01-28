@@ -19,44 +19,32 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     var sceneLocationView = SceneLocationView()
     let locationManager = CLLocationManager()
     
-    var dataArray : [Data] = [Data]()
+    var dataArray = [Data]()
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var addNewObjectButton: UIButton!
     
     @IBAction func addNewObjectAction(_ sender: Any) {
-        let title = "Chope your seat!"
-        let message = "Enter your name!"
-        
-        let popup = PopupDialog(title: title, message: message)
-        
-        // Create buttons
-        let buttonOne = DefaultButton(title: "Click me!") {
-            
-        }
-        
-        locationManager.startUpdatingLocation()
-        
-        popup.addButtons([buttonOne])
+        //locationManager.startUpdatingLocation()
         
         //1. Create the alert controller.
         let alert = UIAlertController(title: "Chope Your Space!", message: "Enter Your Name", preferredStyle: .alert)
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
-            textField.text = "Kia Sue"
+            textField.placeholder = "Your name here!"
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { [weak alert] (_) in
+            alert?.dismiss(animated: true, completion: {
+            })
+        }))
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             print("Text field: \(textField?.text ?? "nothing entered")")
             //Add name and location to Firebase!
             self.addNode(name: textField!.text!)
-        }))
-        alert.addAction(UIAlertAction(title: "Dismiss", style: .default, handler: { [weak alert] (_) in
-            alert?.dismiss(animated: true, completion: {
-            })
         }))
         
         
@@ -230,7 +218,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
     func retrieveData() {
         print("Retrieving data!")
         let dataDB = Database.database().reference().child("locations")
-        dataDB.observe(.childAdded) { (snapshot) in
+        dataDB.observe(.childAdded, with: { (snapshot) in
             let snapshotValue = snapshot.value as! Dictionary<String, String>
             let lat = snapshotValue["lat"]!
             let long = snapshotValue["long"]!
@@ -239,19 +227,18 @@ class ViewController: UIViewController, ARSCNViewDelegate, CLLocationManagerDele
             
             let data = Data(lat: lat, long: long, alt: alt, name: name)
             self.dataArray.append(data)
-        }
+        })
         displayNodes(dataArray: self.dataArray)
     }
     
     func displayNodes(dataArray: [Data]) {
-        dataArray.forEach { (data) in
+        for data in dataArray {
+            let coordinates = CLLocationCoordinate2D(latitude: Double(data.lat)!, longitude: Double(data.long)!)
             
-            let twoDLocation = CLLocationCoordinate2D(latitude: Double(data.lat)!, longitude: Double(data.long)!)
-            
-            let location = CLLocation(coordinate: twoDLocation, altitude: Double(data.alt)!)
+            let location = CLLocation(coordinate: coordinates, altitude: Double(data.alt)!)
             let pinLocationNode = LocationAnnotationNode(location: location, image: #imageLiteral(resourceName: "pin"))
             pinLocationNode.scaleRelativeToDistance = true
-            self.sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
+            sceneLocationView.addLocationNodeWithConfirmedLocation(locationNode: pinLocationNode)
             
             print("loaded lat: \(data.lat), long: \(data.long), alt: \(data.alt)")
         }
